@@ -8,7 +8,7 @@ try:
     datetime.datetime.strptime(date, '%m/%d/%Y')
 except ValueError:
     raise ValueError("Incorrect data format, should be MM/DD/YYYY")
-    
+
 page = requests.get(f"https://www.yallakora.com/Match-Center/?date={date}")
 match_list = []
 
@@ -45,5 +45,6 @@ def main(page):
         writer.writeheader()
         writer.writerows(match_list)
         print("File Created")
+
 
 main(page)
