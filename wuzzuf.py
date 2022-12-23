@@ -3,13 +3,13 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-#title = input("Enter your job title ")
+title = input("Enter your job title:\n")
 # session = HTMLSession()
 page_num = 0
 jobs = [] # List of dicts to put each job's full details at
 
 while True:
-    page = requests.get(f"https://wuzzuf.net/search/jobs/?q=devops&start={page_num}")
+    page = requests.get(f"https://wuzzuf.net/search/jobs/?q={title}&start={page_num}")
     soup = BeautifulSoup(page.content, "lxml")
     jobs_amount = soup.find("span", {"class": "css-xkh9ud"}).strong.text.strip()
 
