@@ -40,7 +40,7 @@ def main(page):
     for i in range(len(championships)):
         get_match_data(championships[i])
 
-    with open("matches.csv", "w") as output_file:
+    with open("yalla_kora.csv", "w") as output_file:
         writer = csv.DictWriter(output_file, fieldnames=match_list[0].keys())
         writer.writeheader()
         writer.writerows(match_list)
