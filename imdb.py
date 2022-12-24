@@ -4,8 +4,11 @@ import csv
 
 year = input("Enter a year to search top movies for\n")
 
-if int(year) < 1874 or int(year) > 2029:
-    raise ValueError("Invalid Date")
+try:
+    if int(year) < 1874 or int(year) > 2029:
+        raise ValueError("Invalid Date")
+except:
+    raise TypeError("Enter a year in format YYYY")
 
 url = f"http://www.imdb.com/search/title?release_date={year}"
 page = requests.get(url)
