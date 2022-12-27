@@ -3,9 +3,9 @@ import time
 from selenium import webdriver
 
 # define the global variables
-USERNAME = 'mahmoud-abdelghany-rageh'
-EMAIL = 'mahmoud.a.rageh@gmail.com'
-PASSWORD = 'zamalek1911'
+USERNAME = ''
+EMAIL = ''
+PASSWORD = ''
 
 # create a new Chrome browser
 driver = webdriver.Chrome()
