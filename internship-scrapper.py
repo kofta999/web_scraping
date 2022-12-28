@@ -1,14 +1,16 @@
 import time
 
 from selenium import webdriver
+from bs4 import BeautifulSoup
 
 # define the global variables
 USERNAME = ''
 EMAIL = ''
 PASSWORD = ''
+links_fr = []
 
 # create a new Chrome browser
-driver = webdriver.Chrome()
+driver = webdriver.Edge()
 
 # navigate to the LinkedIn login page
 driver.get('https://www.linkedin.com/login')
@@ -33,17 +35,17 @@ time.sleep(5)
 # navigate to the LinkedIn user followed companies page
 driver.get(f'https://www.linkedin.com/in/{USERNAME}/details/interests/?detailScreenTabIndex=1')
 
-# wait for 5 seconds
-time.sleep(5)
-for i in range(20):
-    driver.execute_script('window.scrollBy(0, 500);')
+time.sleep(2)
 
-# locate the elements that contain the names of the companies the user follows
-companies = []
-for i in range(100):
-    try:
-        companies.append(driver.find_element(by='css selector', value=f'#profilePagedListComponent-ACoAADoHiB4BHKlhuTXkEDWpyLt0JhaKOhNCo0g-INTERESTS-VIEW-DETAILS-profileTabSection-COMPANIES-INTERESTS-NONE-en-US-{i} > div > div > div.display-flex.flex-column.full-width.align-self-center > div.display-flex.flex-row.justify-space-between > a > div > span > span:nth-child(1)').text)
-    except:
-        continue
-# create an empty list to store the company names
-print(companies)
+soup = BeautifulSoup(driver.page_source, 'lxml')
+
+links = soup.find_all("a", {"data-field": "active_tab_schools_interests", "target": "_self"})
+
+for i in range(len(links)):
+    if "?legacySchoolId=" not in links[i].attrs["href"]:
+        links_fr.append(links[i].attrs["href"])
+
+print(links_fr)
+driver.quit()
+
+
