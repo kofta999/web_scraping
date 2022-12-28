@@ -49,4 +49,5 @@ for i in range(len(posts)):
 #print(posts[0])
 for post in posts:
     if( post.find('internship') != -1 or post.find('intern') != -1 or post.find('منحة') != -1 or post.find('تدريب') != -1):
+        #company is a place holder
         print(f"found intern at #company# post number {posts.index(post)}")
