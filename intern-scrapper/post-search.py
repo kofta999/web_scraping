@@ -4,8 +4,8 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 # define the global variables
 USERNAME = 'mahmoud-abdelghany-rageh'
-EMAIL = 'mahmoud.a.rageh@gmail.com'
-PASSWORD = 'zamalek1911'
+EMAIL = ''
+PASSWORD = ''
 
 # create a new Chrome browser
 options = Options()
