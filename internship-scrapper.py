@@ -4,13 +4,13 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 
 # define the global variables
-USERNAME = 'mahmoud-abdelghany-rageh'
-EMAIL = 'mostafaxxx555@gmail.com'
-PASSWORD = 'kokoko555'
+USERNAME = ''
+EMAIL = ''
+PASSWORD = ''
 links_fr = []
 
 # create a new Chrome browser
-driver = webdriver.Edge()
+driver = webdriver.Chrome()
 
 # navigate to the LinkedIn login page
 driver.get('https://www.linkedin.com/login')
@@ -43,8 +43,9 @@ soup = BeautifulSoup(driver.page_source, 'lxml')
 links = soup.find_all("a", {"data-field": "active_tab_companies_interests", "target": "_self"})
 
 for i in range(len(links)):
-    if "?legacySchoolId=" not in links[i].attrs["href"]:
-        links_fr.append(links[i].attrs["href"])
+    links_fr.append(links[i].attrs["href"])
+    
+links_fr = set(links_fr)
 
 print(links_fr)
 driver.quit()
