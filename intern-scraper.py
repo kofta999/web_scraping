@@ -1,20 +1,65 @@
-import time
-import csv
-from selenium import webdriver
-from selenium.webdriver.edge.options import Options
-from bs4 import BeautifulSoup
+"""
+This script uses the Selenium and BeautifulSoup libraries to scrape LinkedIn for internship opportunities.
 
-USERNAME = ''
-EMAIL = ''
-PASSWORD = ''
+It requires the following arguments to be defined:
+- USERNAME: the LinkedIn username of the user whose profile page will be accessed
+- EMAIL: the LinkedIn email of the user (required for logging in)
+- PASSWORD: the LinkedIn password of the user (required for logging in)
+
+To use this script, you will need to install the following libraries:
+- selenium
+- beautifulsoup4
+
+You will also need to have the Chrome browser installed, and specify the path to the ChromeDriver executable in the
+code.
+
+To use a pre-existing login session for LinkedIn, specify the "user-data-dir" argument in the ChromeOptions object.
+This will allow the script to access the user's LinkedIn profile page and search for posts without requiring the user
+to manually log in.
+
+To run the script, you will need to:
+1. Define the USERNAME, EMAIL, and PASSWORD variables.
+2. Uncomment the block of code that logs in to LinkedIn (if you want to log in for the first time).
+3. Run the script.
+
+The script will scrape LinkedIn for internship opportunities by:
+1. Navigating to the LinkedIn profile page of the user specified in the USERNAME variable.
+2. Generating a list of company names and their LinkedIn profile links that the user has listed as interests.
+3. Searching for posts on the LinkedIn profiles of the companies that contain the word "internship".
+4. Storing the company name, post text, and post link in a csv file.
+"""
+import time
+from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import csv
+USERNAME = '' # Insert your LinkedIn user-name here.
+EMAIL = ''  # Insert your LinkedIn email here.
+PASSWORD = ''  # Insert your LinkedIn password here.
 links_fr = []
 data = []
-
-
 options = Options()
-# options.add_argument("--headless")
-options.add_argument("user-data-dir=C:\\Users\\SOUQ COMPUTER\\AppData\\Local\\Microsoft\\Edge\\User Data")
-driver = webdriver.Edge(options=options)
+options.add_argument("--headless")   #comment this line if ypu want the browser to be visible
+options.add_argument("user-data-dir=C:\\Users\\USER NAME\\AppData\\Local\\Google\\Chrome\\User Data")
+driver = webdriver.Chrome(options=options)
+
+# Uncomment the following block of code if you want to login for the first time.
+# # Navigate to the LinkedIn login page.
+# driver.get('https://www.linkedin.com/login')
+#
+# # Locate the email and password input elements.
+# email_input = driver.find_element(by='id', value='username')
+# password_input = driver.find_element(by='id', value='password')
+#
+# # Locate the login button.
+# login_button = driver.find_element(by='xpath', value='//button[@type="submit"]')
+#
+# # Enter your email and password.
+# email_input.send_keys(EMAIL)
+# password_input.send_keys(PASSWORD)
+#
+# # Click the login button.
+# login_button.click()
 
 def company_names_generator():
     driver.get(f'https://www.linkedin.com/in/{USERNAME}/details/interests/?detailScreenTabIndex=1')
