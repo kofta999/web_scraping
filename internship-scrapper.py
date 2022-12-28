@@ -4,9 +4,9 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 
 # define the global variables
-USERNAME = ''
-EMAIL = ''
-PASSWORD = ''
+USERNAME = 'mahmoud-abdelghany-rageh'
+EMAIL = 'mostafaxxx555@gmail.com'
+PASSWORD = 'kokoko555'
 links_fr = []
 
 # create a new Chrome browser
@@ -31,15 +31,16 @@ login_button.click()
 
 # wait for 5 seconds
 time.sleep(5)
-
+print("here1")
 # navigate to the LinkedIn user followed companies page
 driver.get(f'https://www.linkedin.com/in/{USERNAME}/details/interests/?detailScreenTabIndex=1')
 
 time.sleep(2)
+print("here2")
 
 soup = BeautifulSoup(driver.page_source, 'lxml')
 
-links = soup.find_all("a", {"data-field": "active_tab_schools_interests", "target": "_self"})
+links = soup.find_all("a", {"data-field": "active_tab_companies_interests", "target": "_self"})
 
 for i in range(len(links)):
     if "?legacySchoolId=" not in links[i].attrs["href"]:
