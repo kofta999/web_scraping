@@ -1,0 +1,25 @@
+import requests
+from bs4 import BeautifulSoup
+
+
+def link_grapper(search_query):
+    better_links = []
+
+    for i in range(2):
+        url = f"https://www.google.com.eg/search?q={search_query}&start={i * 10}"
+
+        page = requests.get(url)
+        soup = BeautifulSoup(page.content, 'lxml')
+        links = soup.find_all('div', {'class': 'BNeawe UPmit AP7Wnd lRVwie'})
+
+        for link in links:
+            better_links.append(link.span.text.split('‹')[-1].strip())
+
+    return better_links
+
+search_queries = input("Enter search queries separted by a space: ").split()
+
+for search_query in search_queries:
+    with open('links.txt', 'a') as file:
+        for link in link_grapper(search_query):
+            file.write(f"0.0.0.0 {link}\n")
