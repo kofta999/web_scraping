@@ -107,7 +107,7 @@ def post_searcher(companies):
 
         for i in range(len(posts)):
             posts[i] = posts[i].find("span", {"class": "break-words"})
-            if "internship" in str(posts[i]) or "منحة" in str(posts[i]) or "تدريب" in str(posts[i]):
+            if any(keyword in str(posts[i]) for keyword in ["internship", "منحة", "تدريب"]):
                 data.append({"Notification": f"Found intern opportunity at {company} in post number {i+1}",
                     "Post Details": posts[i].text})
 
