@@ -39,7 +39,7 @@ PASSWORD = ''  # Insert your LinkedIn password here.
 links_fr = []
 data = []
 options = Options()
-options.add_argument("--headless")   #comment this line if ypu want the browser to be visible
+options.add_argument("--headless")   # comment this line if you want the browser to be visible
 options.add_argument("user-data-dir=C:\\Users\\USER NAME\\AppData\\Local\\Google\\Chrome\\User Data")
 driver = webdriver.Chrome(options=options)
 
